@@ -1,0 +1,121 @@
+<div class="row">
+    <div  [ngClass]="isEmpFormVisible ?'col-8':'col-12'" >
+        <div class="card">
+            <div class="card-header bg-success">
+                <div class="row">
+                    <div class="col-6">
+                        Employee List
+                    </div>
+                    <div class="col-6 text-end">
+                        <button class="btn btn-sm btn-primary" (click)="isEmpFormVisible = true">Add New</button>
+                    </div>
+                </div>
+              
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4 pt-2" *ngFor="let item of employeeList">
+                        <div class="card">
+                            <div class="card-header bg-primary">
+                                <i class="fa fa-user"></i>  {{item.employeeName}}
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <i class="fa fa-phone"></i> {{item.contactNo}}
+                                    </div>
+                                    <div class="col-6">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i> {{item.emailId}}
+                                    </div>
+                                </div>
+                                <div class="row pt-3">
+                                    <div class="col-6">
+                                        <i class="fa fa-server"></i> {{item.deptName}}
+                                    </div>
+                                    <div class="col-6">
+                                        <i class="fa fa-user-secret" aria-hidden="true"></i> {{item.role}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-4" *ngIf="isEmpFormVisible">
+        <div class="card">
+            <div class="card-header bg-success">
+                <div class="row">
+                    <div class="col-6">
+                        New Employee
+                    </div>
+                    <div class="col-6 text-end">
+                        <button class="btn btn-sm btn-primary" (click)="isEmpFormVisible = false">Close</button>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="">Name</label>
+                        <input type="text" [(ngModel)]="employeeObj.employeeName" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="">Contact No</label>
+                        <input type="text" [(ngModel)]="employeeObj.contactNo" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="">Email-Id</label>
+                        <input type="text" [(ngModel)]="employeeObj.emailId" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <input type="radio" name="employeeName" value="Male" [(ngModel)]="employeeObj.gender">
+                        <label for="">Male</label>
+                        <input type="radio"   name="employeeName" value="Fe-Male" [(ngModel)]="employeeObj.gender">
+                        <label for="">Fe-Male</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="">Password</label>
+                        <input type="text" [(ngModel)]="employeeObj.password" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="">Select Department</label>
+                        <select class="form-select" [(ngModel)]="employeeObj.deptId">
+                            @for (item of deptList$ | async; track item.deptId) {
+                                <option  [value]="item.deptId"> {{item.deptName}}</option>
+                            } 
+                        </select>
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="col-6">
+                        <label for="">Select Role</label>
+                        <select class="form-select"  [(ngModel)]="employeeObj.role">
+                            <option>Employee</option>
+                            <option>Admin Department Employee</option>
+                            <option>Department Head</option>
+                            <option>Super Admin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div class="col-6 text-center">
+                        <button class="btn btn-secondary">Reset</button>
+                    </div>
+                    <div class="col-6 text-center">
+                        <button class="btn btn-success" (click)="onSaveEmp()">Save Employee</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

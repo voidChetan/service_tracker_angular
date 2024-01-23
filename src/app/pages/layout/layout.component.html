@@ -1,0 +1,23 @@
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>tickets</h2>
+        <ul>
+            <li><a routerLink="/dashboard">  Dashboard</a></li>
+            <li *ngIf="loggedData.role == 'Super Admin'"><a routerLink="/employee"> Employee</a></li>
+            <li *ngIf="loggedData.role == 'Super Admin'"><a routerLink="/department"> Department</a></li>
+            <li><a routerLink="/tickets"> Tickets</a></li>
+            <li><a routerLink="/new-ticket"> New-Ticket</a></li>
+        </ul> 
+        <div class="social_media" style="bottom: 6%;"> 
+          <a href="#">{{loggedData.emailId}}</a> 
+      </div>
+      <div class="social_media"> 
+        <a (click)="onLogoff()">Log-off</a> 
+    </div>
+    </div>
+    <div class="main_content"> 
+        <div class="info">
+            <router-outlet></router-outlet>
+      </div>
+    </div>
+</div>

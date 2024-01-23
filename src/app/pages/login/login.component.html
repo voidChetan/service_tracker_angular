@@ -1,0 +1,19 @@
+<div class="parent"> 
+    <div class="container">
+        <div class="pic2"></div>
+        <img src="https://store-images.s-microsoft.com/image/apps.28471.14139628370441750.28b315c6-e587-4ac5-8b42-4388ed4a2f09.d5ba0d3b-63ca-4d9d-ba00-47fcfa6b02e1"
+            alt="">
+        <h1>Log in To Continue</h1>
+        <div class="inp">
+            <input [(ngModel)]="loginObj.emailId" type="text" id="username">
+            <label  for="Username">Username</label>
+        </div>
+        <div class="inp">
+            <input  [(ngModel)]="loginObj.password" type="password" id="password">
+            <label   for="Password">Password</label>
+        </div> 
+        <button type="button" (click)="onLogin()">Login</button> 
+    </div>
+    <div class="pic">
+    </div>
+</div>
