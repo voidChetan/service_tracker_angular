@@ -58,4 +58,17 @@ export class EmployeeService {
     return this.http.post<APIResponse>(environment.API_URL + Constant.API_END_POINT.CLOSE_TICKET + ticketId, {})
   }
 
+  getSuperAdminDashboard() : Observable<APIResponse> {
+    return this.http.get<APIResponse>(environment.API_URL + Constant.API_END_POINT.GET_SUPER_ADIMIN_DASH)
+  }
+  getEmployeeDashByEmpId(empId: number) : Observable<APIResponse> {
+    return this.http.get<APIResponse>(environment.API_URL + Constant.API_END_POINT.GET_EMPLOYEE_DASH + empId)
+  }
+  getAdminEmployeeDashByEmpId(empId: number) : Observable<APIResponse> {
+    return this.http.get<APIResponse>(environment.API_URL + Constant.API_END_POINT.GET_ADMIN_EMPLOYEE_DASH + empId)
+  }
+  getDeptHeadDashboardByDeptHead(empId: number) : Observable<APIResponse> {
+    return this.http.get<APIResponse>(environment.API_URL + Constant.API_END_POINT.GET_DEPT_HEAD_DASH + empId)
+  }
+
 }

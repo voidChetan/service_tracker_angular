@@ -17,10 +17,11 @@ export class EmployeeComponent implements OnInit {
 
 
   deptList$: Observable<Department[]> | undefined;
+  oemployeeList: EmployeeModel[]=  [];
   employeeList: EmployeeModel[]=  [];
   isEmpFormVisible:boolean = false;
   employeeObj: EmployeeModel = new EmployeeModel();
-
+  sortDept: string = '';
   constructor(private deptSrv: DepartmentService,private empSrv: EmployeeService) {
     this.deptList$ = deptSrv.getDeptList();
   }
@@ -32,7 +33,11 @@ export class EmployeeComponent implements OnInit {
   loadAllEmployees() {
     this.empSrv.getAllEmployee().subscribe((res:APIResponse)=>{
       this.employeeList = res.data;
+      this.oemployeeList = res.data;
     })
+  }
+  onDeptChange(deptId: number) {
+    this.employeeList =  this.oemployeeList.filter(m=>m.deptId ==deptId);
   }
   onSaveEmp() {
     this.empSrv.createEmployee(this.employeeObj).subscribe((res:APIResponse)=>{

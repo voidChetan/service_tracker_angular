@@ -1,1 +1,96 @@
-<p>dashboard works!</p>
+<div class="parent">
+    <h5>Welcome To Dashboard</h5>
+    <div class="row">
+        <div class="col-xl-3 pb-3" *ngIf="loggedData.role == 'Super Admin' ||  loggedData.role == 'Department Head'">
+            <div class="bg-white box-shadow border-radius-10 height-100-p widget-style3">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="widget-data">
+                        <div class="weight-500 font-20">Total Employees</div>
+                        <div class="weight-500 font-30 text-dark">{{dasboardData?.totalEmployees}}</div>
+                    </div>
+                    <div class="widget-icon">
+                        <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 pb-3" *ngIf="loggedData.role == 'Super Admin'">
+            <div class="bg-white box-shadow border-radius-10 height-100-p widget-style3">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="widget-data">
+                        <div class="weight-500 font-20">Total Departments</div>
+                        <div class="weight-500 font-30 text-dark">{{dasboardData?.totalDepartments}}</div>
+                    </div>
+                    <div class="widget-icon">
+                        <div class="icon"><i class="fa fa-id-card" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 pb-3">
+            <div class="bg-white box-shadow border-radius-10 height-100-p widget-style3">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="widget-data">
+                        <div class="weight-500 font-20">Total Tickets</div>
+                        <div class="weight-500 font-30 text-dark">{{dasboardData?.totalTickets}}</div>
+                    </div>
+                    <div class="widget-icon">
+                        <div class="icon"><i class="fa fa-server" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 pb-3" *ngIf="loggedData.role != 'Admin Department Employee'">
+            <div class="bg-white box-shadow border-radius-10 height-100-p widget-style3">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="widget-data">
+                        <div class="weight-500 font-20">Un-Assigned</div>
+                        <div class="weight-500 font-30 text-dark">{{dasboardData?.totalUnAssignedTickets}}</div>
+                    </div>
+                    <div class="widget-icon">
+                        <div class="icon"><i class="fa fa-line-chart" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 pb-3">
+            <div class="bg-white box-shadow border-radius-10 height-100-p widget-style3">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="widget-data">
+                        <div class="weight-500 font-20">Assigned</div>
+                        <div class="weight-500 font-30 text-dark">{{dasboardData?.totalAssignedTickets}}</div>
+                    </div>
+                    <div class="widget-icon">
+                        <div class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 pb-3">
+            <div class="bg-white box-shadow border-radius-10 height-100-p widget-style3">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="widget-data">
+                        <div class="weight-500 font-20">In-Progress</div>
+                        <div class="weight-500 font-30 text-dark">{{dasboardData?.totalInProgressTickets}}</div>
+                    </div>
+                    <div class="widget-icon">
+                        <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 pb-3">
+            <div class="bg-white box-shadow border-radius-10 height-100-p widget-style3">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="widget-data">
+                        <div class="weight-500 font-20">Closed</div>
+                        <div class="weight-500 font-30 text-dark">{{dasboardData?.totalClosedTickets}}</div>
+                    </div>
+                    <div class="widget-icon">
+                        <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,3 +1,3 @@
 export const environment = {
-    API_URL: 'https://freeapi.miniprojectideas.com/api/Tickets/'
+    API_URL: 'https://freeapi.gerasim.in/api/Tickets/'
 };

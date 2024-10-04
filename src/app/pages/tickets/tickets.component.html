@@ -1,0 +1,151 @@
+<div class="row">
+    <div class="col-6">
+        Ticket List
+    </div>
+    <div class="col-6 text-end">
+        <button class="btn btn-sm btn-primary" (click)="openTicketModel()">New Ticket</button>
+    </div>
+</div>
+<div class="row">
+    @for (ticket of ticketsList; track ticket.ticketId) {
+    <div class="col-4 pt-2">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="row">
+                    <div class="col-6">
+                        <i class="fa fa-user"> {{ticket.ticketNo}}</i>
+                    </div>
+                    <div class="col-6 text-end">
+                        {{ticket.createdDate |date: 'dd-MMM-yy'}}
+                    </div>
+                </div> 
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <i class="fa fa-user"></i> {{ticket.createdByEmployee}}
+                    </div>
+                    <div class="col-6 text-end">
+                        <i class="fa fa-phone"></i> {{ticket.contactNo}}
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6">
+                        <label for="">Assigned To </label> <br> {{ticket.assignedToEmployee |na}}
+                    </div>
+                    <div class="col-6 text-end">
+                        <label for="">Estimated Completion</label> <br> {{ticket.expectedEndDate |date: 'dd-MMM-yy'}}
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6">
+                        <i class="fa fa-server"></i> {{ticket.deptName}}
+                    </div>
+                    <div class="col-6 text-end">
+                        <i class="fa fa-user-secret" aria-hidden="true"></i> {{ticket.severity}}
+                    </div>
+                </div>
+                
+                <div class="row pt-2">
+                    <div class="col-6" *ngIf="loggedData.role =='Department Head'">
+                        <select class="form-select" (change)="assignEmp($event, ticket.ticketId)">
+                            <option>Select Employee</option>
+                            <option *ngFor="let emp of deptEmployeeList" [value]="emp.employeeId">{{emp.employeeName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-6" *ngIf="loggedData.role =='Admin Department Employee'">
+                        <button class="btn btn-success" *ngIf="ticket.state =='Assigned'"
+                            (click)="startTicket(ticket.ticketId)">Start Ticket</button>
+                        <button class="btn btn-danger" *ngIf="ticket.state =='In-Progress'"
+                            (click)="closeTicket(ticket.ticketId)">Close Ticket</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="md-stepper-horizontal orange">
+                            <div class="row">
+                                <div class="col md-step" [ngClass]="ticket.state == status?'active':''"
+                                    *ngFor="let status of ticketStatusList">
+
+                                    <div class="md-step-circle"><span></span></div>
+                                    <div class="md-step-title">{{status}}</div>
+                                    <div class="md-step-bar-left"></div>
+                                    <div class="md-step-bar-right"></div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="md-step active editable">
+                                                  <div class="md-step-circle"><span>2</span></div>
+                                                  <div class="md-step-title">Shipping</div>
+                                                  <div class="md-step-optional">Optional</div>
+                                                  <div class="md-step-bar-left"></div>
+                                                  <div class="md-step-bar-right"></div>
+                                                </div>
+                                                <div class="md-step active">
+                                                  <div class="md-step-circle"><span>3</span></div>
+                                                  <div class="md-step-title">Payment</div>
+                                                  <div class="md-step-bar-left"></div>
+                                                  <div class="md-step-bar-right"></div>
+                                                </div>
+                                                <div class="md-step">
+                                                  <div class="md-step-circle"><span>4</span></div>
+                                                  <div class="md-step-title">Review</div>
+                                                  <div class="md-step-bar-left"></div>
+                                                  <div class="md-step-bar-right"></div>
+                                                </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    } @empty {
+    <div class="col-12 p-5 text-center">
+        <p>No Tickets Found Yet</p>
+    </div>
+    }
+</div>
+<div class="modal" id="ticketModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">New Ticket</h4>
+                <button type="button" class="btn-close" (click)="closeTicketModel()" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="">Select Department</label>
+                        <select class="form-select" [(ngModel)]="ticketObj.deptId">
+                            <option value="">Select</option>
+                            @for (item of deptList$ | async; track item.deptId) {
+                            <option [value]="item.deptId"> {{item.deptName}}</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="">Select Severity</label>
+                        <select class="form-select" [(ngModel)]="ticketObj.severity">
+                            <option value="">Select</option>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="">Enter Your Ticket Details</label>
+                        <textarea rows="3" class="form-control" [(ngModel)]="ticketObj.requestDetails"
+                            placeholder="Enter Details"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-succes" (click)="onCreateTicket()">Create Ticket</button>
+            </div>
+        </div>
+    </div>
+</div>

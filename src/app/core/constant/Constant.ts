@@ -14,7 +14,11 @@ export const Constant = {
         ASSIGN_TICKET:'AssignRequest',
         GET_ASSIGNED_TICKETS:'GetAssignedTicketsByEmpId?empId=',
         START_TICKET: 'startTicket?id=',
-        CLOSE_TICKET: 'closeTicket?id=' 
+        CLOSE_TICKET: 'closeTicket?id=', 
+        GET_SUPER_ADIMIN_DASH: 'GetSuperAdminDashboard',
+        GET_EMPLOYEE_DASH: 'getEmployeeDashByEmpId?empId=',
+        GET_ADMIN_EMPLOYEE_DASH: 'getAdminEmployeeDashByEmpId?empId=',
+        GET_DEPT_HEAD_DASH: 'getDeptHeadDashboardByDeptHead?deptHeadEmpId=' 
    
         
     },
